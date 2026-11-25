@@ -9,8 +9,6 @@ kv_t *kv_test(void *p_kv_table) {
 
 int main() {
   kv_t *table = kv_init(3);
-  kv_test(table);
-
   kv_put(table, "hehe", "haha"); 
 
   for (int i = 0; i < table->capacity; i++){
@@ -32,5 +30,7 @@ int main() {
   printf("%s %s\n", val, val2);
   val = kv_get(table, "hehe");
 
-   printf("%s %s\n", val, val2);
+  printf("%s %s\n", val, val2);
+
+  kv_free(table);
 }

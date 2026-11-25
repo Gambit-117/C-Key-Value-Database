@@ -23,6 +23,30 @@ size_t hash(char *val, int capacity) {
 
 
 
+// fn kv_free 
+// params: 
+// - db: a pointer to the db 
+// returns: 0 if the db is deleted successfully, otherwise 
+// on error, returns -1
+int kv_free(kv_t *db) {
+  if (!db) return -1;
+
+  // free keys, entries, and db memory 
+  for (int i = 0; i < db->capacity - 1; i++) {
+
+    kv_entry_t *entry = &db->entries[i];
+
+    free (entry->key);
+    free (entry->value);
+  }
+
+  free(db->entries);
+  free(db);
+
+  return 0;
+}
+
+
 // fn kv_delete
 // params:
 // - db: a pointer to the db
